@@ -1,0 +1,18 @@
+version: '3.9'
+services:
+  apache:
+    image: httpd:2.4.55-alpine
+    ports:
+      - '8081:8081'
+    restart: always
+    volumes:
+      - ./website:/usr/local/apache2/htdocs
+    environment:
+      VIRTUAL_HOST: localnotes.costa365.site
+      PORT: 8081
+    networks:
+      - nginx-proxy
+
+networks:
+  nginx-proxy:
+    external: true
